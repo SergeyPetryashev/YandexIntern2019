@@ -3,7 +3,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TaskAGraphString {
 
@@ -22,7 +24,8 @@ public class TaskAGraphString {
 	
 	private static void graphVertex(List<String> words) {
 		List<Edge> edge = new ArrayList<>();
-		List<String> vertex = new ArrayList<>();
+//		List<String> vertex = new ArrayList<>();
+		Set<String> vertex = new HashSet<>();
 		for(int i=0;i<words.size();i++) {
 			String start=null;
 			for(int j=3;j<words.get(i).length()+1;j++) {
@@ -37,10 +40,10 @@ public class TaskAGraphString {
 						edge.get(index).addWeight();
 					}						
 				}
-				
-				if(isNewVertex(vertex, end)) {
+				vertex.add(end);
+		/*		if(isNewVertex(vertex, end)) {
 					vertex.add(end);
-				}
+				}*/
 				start=end;
 			}
 		}
