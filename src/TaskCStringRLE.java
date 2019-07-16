@@ -15,13 +15,15 @@ public class TaskCStringRLE {
         String strRLE=br.readLine();
         int numRequest = Integer.parseInt(br.readLine()); 
         List<String []> startEnd = new ArrayList<>(numRequest);
-        for(int i=0;i<numRequest;i++) {
-        	String [] s=br.readLine().split(" ");
+        String str;
+        while((str=br.readLine())!=null) {
+        	String [] s=str.split(" ");
         	startEnd.add(s);
         }
+ 
         br.close(); 
         System.out.println("Свернутое: "+strRLE);
-        for(int i=0;i<numRequest;i++) {
+        for(int i=0;i<startEnd.size();i++) {
         	lengthRLESubstring(strRLE,Integer.parseInt(startEnd.get(i)[0]),Integer.parseInt(startEnd.get(i)[1]));
         }
 	}

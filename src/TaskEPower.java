@@ -3,7 +3,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Stack;
-
+/*From the array A of length N from non-negative integers choose K elements of the array. 
+ * The product of the selected numbers is M
+ * 1<=K<=N<=5000
+ *  0<=Ai<=10e9
+ * */
 public class TaskEPower {
 	public static void main(String[] args) throws NumberFormatException, IOException {
         File file = new File("inputE.txt");
@@ -44,22 +48,14 @@ public class TaskEPower {
 	        	}	        	
 	        }
 	        System.out.println();
-/*	        indexSt=findPowerCycl(array, target, numComponent);
-	        if(indexSt.size()==numComponent) {
-		        while(!indexSt.isEmpty()) {
-		        	if(indexSt.size()>1) {
-		        		System.out.print(indexSt.pop()+" ");
-		        	}else {
-		        		System.out.print(indexSt.pop());
-		        	}
-		        }
-	        }*/
 	        
 	        int [] index=findPowerCycl(array, target, numComponent);
 	        for(int i=0;i<index.length;i++) {
-	        	if(index[i]!=0) {
-	        		System.out.print(index[i]+" ");
-	        	}
+        		if(i==index.length-1) {
+        			System.out.print(index[i]);
+        		}else {
+        			System.out.print(index[i]+" ");
+        		}
 	        }
         }
 
@@ -84,15 +80,12 @@ public class TaskEPower {
 		return findPower(arr, target, num, index+1, indexSt);
 	}
 	
-	// решение без рекурсии, но принцип тот же. ѕримен€етс€ стек
-	 // ошибка представлени€ на 5 тесте
 	private static int[] findPowerCycl(int[] arr, int target, int numPow) { 
-//		Stack<Integer>index=new Stack<>();
-		int [] result = new int [arr.length];
+		int [] result = new int [numPow];
+		int index=0;
 		for(int i=0;i<arr.length;i++) {
 			if(arr[i]!=0 && target%arr[i]==0) {
-//				index.push(i+1);
-				result[i]=i+1;
+				result[index++]=i+1;
 				target=target/arr[i];
 				numPow--;
 				if(target==1 && numPow==0) {
@@ -100,16 +93,14 @@ public class TaskEPower {
 				}				
 			}
 			if(target!=1 && numPow==0) {
-//				i=index.pop()-1;
-				i=result[i]-1;
-				result[i]=0;
+				i=result[--index]-1;
+				result[index]=0;
 				target=target*arr[i];
 				numPow++;
 			}
-			if(i==arr.length-1) {
-//				i=index.pop()-1;
-				i=result[i]-1;
-				result[i]=0;
+			while(i==arr.length-1) {
+				i=result[--index]-1;
+				result[index]=0;
 				target=target*arr[i];
 				numPow++;
 			}
