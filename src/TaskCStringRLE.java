@@ -30,7 +30,7 @@ public class TaskCStringRLE {
 	private static void lengthRLESubstring(String str, int start, int end) {
 		String result="";
 		int lastEnd=0;
-		int numCharLast=0, numCharNew=0;
+		long numCharLast=0, numCharNew=0;
 		int lengthRLE=0;
 		boolean isStart=true;
 		boolean isEnd=true;
@@ -45,7 +45,7 @@ public class TaskCStringRLE {
 	        }
 
 	        numCharNew+=num;
-	        int targetNum=0;
+	        long targetNum=0;
 	        String s="";
 	        if(isStart && numCharNew>=end) {// диапазон чисел сразу перекрыл искомый
 	        	targetNum=end-start+1;
