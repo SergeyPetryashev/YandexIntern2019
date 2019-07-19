@@ -53,7 +53,7 @@ public class TaskDLikeNumber {
 				listNumb=shiftNumber (numbers, numbers.length);
 			}			
         }
-//        System.out.println(listNumb);
+  //      System.out.println(listNumb);
         if(numShift==0){
         	listNumb.put(number,(long)1);
         	probably(listNumb);

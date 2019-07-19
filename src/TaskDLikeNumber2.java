@@ -9,6 +9,7 @@ import java.util.List;
  * Find the probability that the final number will be divided by at least 
  * one of the numbers 5, 6, 10
  */
+// алгоритм не готов
 public class TaskDLikeNumber2 {
 
 	public static void main(String[] args) throws IOException {
@@ -37,11 +38,11 @@ public class TaskDLikeNumber2 {
         
         if(summ%3==0 && numTwo!=0) {
         	notSuccess=factorial(numbers.length-numTwo);
-        	res+=(allComb-notSuccess)/allComb;
+        	res+=(allComb-numTwo)/allComb;
         }
         if(numFive!=0){
         	notSuccess=factorial(numbers.length-numFive);        	
-        	res+=(allComb-notSuccess)/allComb;
+        	res+=(allComb-numFive)/allComb;
         }
         
         System.out.println(res);

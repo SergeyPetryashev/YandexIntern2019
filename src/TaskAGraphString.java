@@ -3,9 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class TaskAGraphString {
 
@@ -24,26 +22,22 @@ public class TaskAGraphString {
 	
 	private static void graphVertex(List<String> words) {
 		List<Edge> edge = new ArrayList<>();
-//		List<String> vertex = new ArrayList<>();
-		Set<String> vertex = new HashSet<>();
+		List<String> vertex = new ArrayList<>();
 		for(int i=0;i<words.size();i++) {
-			String start=null;
+			String start=null, end=null;
 			for(int j=3;j<words.get(i).length()+1;j++) {
-				
-				String end = words.get(i).substring(j-3,j);
-				
+				end = words.get(i).substring(j-3,j);
 				if(start!=null) {
 					int index;
-					if((index=isNewEdge(edge, start, end))==-1) {
-						edge.add(new Edge(start, end, 1));
+					if((index=isNewEdge(edge, start+end))==-1) {
+						edge.add(new Edge(start+end, 1));
 					}else {
 						edge.get(index).addWeight();
-					}						
+					}
 				}
-				vertex.add(end);
-		/*		if(isNewVertex(vertex, end)) {
+				if(!vertex.contains(end)) {
 					vertex.add(end);
-				}*/
+				}
 				start=end;
 			}
 		}
@@ -56,44 +50,27 @@ public class TaskAGraphString {
 		
 	}
 	
-	private static int isNewEdge(List<Edge> edge, String start, String end){
+	private static int isNewEdge(List<Edge> edge, String startEnd){
 		for (int i=0;i<edge.size();i++) {
-			String startCurrent = edge.get(i).getStartVertex();
-			String endCurrent = edge.get(i).getEndVertex();
-			if(startCurrent.equals(start) && endCurrent.equals(end)) {
+			String startEndCurrent = edge.get(i).getStartEndVertex();
+			if(startEndCurrent.equals(startEnd)) {
 				return i;
 			};
 		}
 		return -1;
 	}
-	
-	private static boolean isNewVertex(List<String> vert, String word) {
-		for(String s: vert) {
-			if(s.equals(word)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
 }
 
 class Edge{
-	String startVertex;
-	String endVertex;
+	String startEndVertex;
 	int weight;
-	public Edge(String startVertex, String endVertex, int weight ) {
-		this.startVertex=startVertex;
-		this.endVertex=endVertex;
+	public Edge(String startEndVertex, int weight ) {
+		this.startEndVertex=startEndVertex;
 		this.weight=weight;
 	}
 	
-	public String getStartVertex() {
-		return startVertex;
-	}
-	
-	public String getEndVertex() {
-		return endVertex;
+	public String getStartEndVertex() {
+		return startEndVertex;
 	}
 	
 	public int getWeight() {
@@ -105,6 +82,6 @@ class Edge{
 	}
 	
 	public void display() {
-		System.out.println(startVertex +" "+ endVertex+ " "+weight);
+		System.out.println(startEndVertex.substring(0,3) +" "+ startEndVertex.substring(3,6)+ " "+weight);
 	}
 }
