@@ -13,43 +13,36 @@ import java.util.*;
  * derive oriented edges between the vertices. 
  */
 public class TaskAGraphStringMap {
-
+	static Map<String, Integer> edge = new HashMap<>();
+	static Set<String> vertex = new HashSet<>();
 	public static void main(String[] args) throws IOException {
         File file = new File("inputA.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
         int numWords = Integer.parseInt(br.readLine()); 
-        List<String> listWords = new ArrayList<>(numWords);
         String str="";
         while((str=br.readLine())!=null) {
-        	listWords.add(str);
+        	graphVertex(str);
         }
         br.close();
-        graphVertex(listWords);
-	}
-	
-	private static void graphVertex(List<String> words) {
-		Map<String, Integer> edge = new HashMap<>();
-		Set<String> vertex = new HashSet<>();
-		for(int i=0;i<words.size();i++) {
-			String start=null, end=null;
-			for(int j=3;j<words.get(i).length();j++) {
-				start = words.get(i).substring(j-3,j);
-				end = words.get(i).substring(j-2,j+1);
-				
-				if(edge.containsKey(start+end)) {
-					edge.put(start+end,edge.get(start+end)+1);
-				}else {
-					edge.put(start+end, 1);
-				}				
-				vertex.add(start);				
-			}
-			vertex.add(end);
-		}
-		
 		System.out.println(vertex.size());
 		System.out.println(edge.size());
 		edgeDisplay(edge);
-
+	}
+	
+	private static void graphVertex(String word) {
+		String start=null, end=null;
+		for(int j=3;j<word.length();j++) {
+			start = word.substring(j-3,j);
+			end = word.substring(j-2,j+1);
+			
+			if(edge.containsKey(start+end)) {
+				edge.put(start+end,edge.get(start+end)+1);
+			}else {
+				edge.put(start+end, 1);
+			}
+			vertex.add(start);				
+		}
+		vertex.add(end);
 	}
 	
 	private static void edgeDisplay(Map<String, Integer> map) {
