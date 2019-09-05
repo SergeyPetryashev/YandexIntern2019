@@ -117,13 +117,17 @@ public class TaskDLikeNumber {
 	private static void probably(Map<Integer,Long> map) {
 		double trueCount=0;
 		double allCount=0;
+		long summ=0;
 		Set<Map.Entry<Integer, Long>> set = map.entrySet();
 		for(Map.Entry<Integer, Long> me : set) {
+//			System.out.print(me+" ");
+			summ+=me.getValue();
 			allCount+=me.getValue();
 			if(me.getKey()%5==0 || me.getKey()%6==0)
 				trueCount+=me.getValue();
 		}
 		double pr = trueCount/allCount;
+//		System.out.printf("\n%d", summ);
 		System.out.printf("%.15f", pr);
 	}
 	
