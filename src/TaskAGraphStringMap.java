@@ -30,25 +30,24 @@ public class TaskAGraphStringMap {
 	}
 	
 	private static void graphVertex(String word) {
-		String start=null, end=null;
+		String subWord=null;
 		for(int j=3;j<word.length();j++) {
-			start = word.substring(j-3,j);
-			end = word.substring(j-2,j+1);
+			subWord = word.substring(j-3,j+1);
 			
-			if(edge.containsKey(start+end)) {
-				edge.put(start+end,edge.get(start+end)+1);
+			if(edge.containsKey(subWord)) {
+				edge.put(subWord,edge.get(subWord)+1);
 			}else {
-				edge.put(start+end, 1);
+				edge.put(subWord, 1);
 			}
-			vertex.add(start);				
+			vertex.add(subWord.substring(0, 3));				
 		}
-		vertex.add(end);
+		vertex.add(subWord.substring(1, 4));
 	}
 	
 	private static void edgeDisplay(Map<String, Integer> map) {
 		Set<Map.Entry<String,Integer>> set = map.entrySet();
 		for(Map.Entry<String,Integer> me : set) {
-			System.out.println(me.getKey().substring(0, 3)+" "+me.getKey().substring(3, 6)+" "+me.getValue());
+			System.out.println(me.getKey().substring(0, 3)+" "+me.getKey().substring(1, 4)+" "+me.getValue());
 		}
 	}
 }
