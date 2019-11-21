@@ -7,7 +7,6 @@ import java.io.IOException;
  * Find the probability that the final number will be divided by at least 
  * one of the numbers 5, 6, 10
  */
-// алгоритм не готов
 public class TaskDLikeNumber2 {
 
 	public static void main(String[] args) throws IOException {
